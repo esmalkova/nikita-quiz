@@ -10,7 +10,7 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #fff;
             min-height: 100vh;
         }
@@ -18,149 +18,177 @@
             max-width: 640px;
             width: 100%;
             margin: 15px auto;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(15px);
+            border-radius: 28px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.5);
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.15);
         }
         header {
-            background: linear-gradient(90deg, #6b46c1, #9f7aea);
-            padding: 25px 20px 15px;
+            background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc);
+            padding: 35px 20px 25px;
             text-align: center;
+            position: relative;
         }
         .cake-container {
-            margin: 0 auto 12px;
-            width: 190px;
-            height: 150px;
+            margin: 0 auto 15px;
+            width: 210px;
+            height: 165px;
         }
         .cake {
             width: 100%;
-            animation: cakeFloat 3.5s ease-in-out infinite;
+            animation: cakeFloat 3.2s ease-in-out infinite;
+            filter: drop-shadow(0 15px 30px rgba(255, 215, 0, 0.8));
         }
         @keyframes cakeFloat {
-            0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-15px) rotate(3deg); }
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
+
         h1 {
-            margin: 5px 0 0;
+            margin: 0;
             font-family: 'Playfair Display', serif;
-            font-size: 2.35em;
+            font-size: 2.5em;
             font-weight: 700;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.6);
         }
         .subtitle {
-            font-size: 1.22em;
+            font-size: 1.3em;
+            margin-top: 12px;
             opacity: 0.95;
-            margin-top: 8px;
+        }
+
+        /* Прогресс-бар */
+        .progress-container {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff00cc, #00ffcc, #ffff00);
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 15px #ffff00;
         }
 
         .quiz-content {
-            padding: 25px 30px 130px;
-            position: relative;
+            padding: 25px 28px 125px;
+            text-align: center;
         }
         #question-container {
-            font-size: 1.33em;
-            line-height: 1.45;
-            margin-bottom: 25px;
-            min-height: 90px;
+            font-size: 1.38em;
+            line-height: 1.5;
+            margin: 25px 0 35px;
+            min-height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .timer {
+            font-size: 2.4em;
+            font-weight: 700;
+            color: #ffff00;
+            text-shadow: 0 0 15px #ffff00;
+            margin: 15px 0;
         }
         .answers {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
         }
         .answer-btn {
-            padding: 18px 24px;
-            font-size: 1.12em;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid transparent;
-            border-radius: 18px;
+            padding: 19px 24px;
+            font-size: 1.13em;
+            background: rgba(255,255,255,0.12);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
             cursor: pointer;
+            transition: all 0.3s ease;
             text-align: left;
         }
         .answer-btn:hover {
-            background: rgba(255,255,255,0.22);
-            transform: translateX(12px);
+            background: rgba(255,255,255,0.25);
+            transform: translateX(15px);
+            border-color: #ffff00;
         }
-        .answer-btn.correct {
-            background: #22c55e;
-            color: white;
-        }
-        .answer-btn.wrong {
-            background: #ef4444;
-            color: white;
-        }
+        .answer-btn.correct { background: #22ff88; color: #000; border-color: #22ff88; }
+        .answer-btn.wrong { background: #ff3366; color: white; border-color: #ff3366; }
 
         #main-btn {
             position: fixed;
-            bottom: 75px;
+            bottom: 22px;
             left: 50%;
             transform: translateX(-50%);
             width: 92%;
             max-width: 580px;
             padding: 19px;
-            font-size: 1.3em;
-            font-weight: 600;
-            background: #ff6b6b;
+            font-size: 1.32em;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff00cc, #ff3366);
             border: none;
-            border-radius: 18px;
+            border-radius: 20px;
             color: white;
-            box-shadow: 0 10px 30px rgba(255,107,107,0.5);
+            box-shadow: 0 12px 35px rgba(255, 51, 102, 0.6);
             z-index: 90;
         }
 
+        /* Скрытая кнопка организатора */
         #organizer-btn {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 14px 40px;
-            font-size: 1.15em;
-            font-weight: 700;
-            background: #ffd93d;
-            color: #1a1a2e;
+            top: 18px;
+            right: 18px;
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.2);
             border: none;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
-            z-index: 100;
+            border-radius: 50%;
+            color: #ffff00;
+            font-size: 28px;
             cursor: pointer;
+            z-index: 200;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
         #waiting-screen, #final-screen {
-            padding: 60px 30px;
+            padding: 70px 30px;
             text-align: center;
             display: none;
         }
         .score-big {
-            font-size: 5.2em;
+            font-size: 5.4em;
             font-weight: 700;
-            color: #ffd93d;
+            color: #ffff00;
+            text-shadow: 0 0 20px #ffff00;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <header>
-        <div class="cake-container">
-            <img src="https://i.imgur.com/bV7un.gif" alt="Торт" class="cake">
-        </div>
-        <h1>Знаешь ли ты Никиту на 100%?</h1>
-        <p class="subtitle">Юбилейный тест на настоящую дружбу 🎂</p>
-    </header>
-
     <!-- Стартовый экран -->
-    <div id="start-screen" class="quiz-content">
-        <input type="text" id="playerName" placeholder="Твоё имя" 
-               style="width:100%; padding:18px; font-size:1.15em; border-radius:16px; border:none; margin-bottom:20px; box-sizing:border-box;">
-        <button onclick="startQuiz()" style="width:100%; padding:18px; font-size:1.25em; border-radius:16px;">Начать тест</button>
+    <div id="start-screen">
+        <header>
+            <div class="cake-container">
+                <img src="https://i.imgur.com/bV7un.gif" alt="Торт" class="cake">
+            </div>
+            <h1>Знаешь ли ты Никиту на 100%?</h1>
+            <p class="subtitle">Юбилейный тест на настоящую дружбу 🎂✨</p>
+        </header>
+        <div class="quiz-content">
+            <input type="text" id="playerName" placeholder="Твоё имя" 
+                   style="width:100%; padding:18px; font-size:1.2em; border-radius:18px; border:none; margin-bottom:25px; box-sizing:border-box;">
+            <button onclick="startQuiz()" style="width:100%; padding:19px; font-size:1.3em; border-radius:18px; background:linear-gradient(90deg,#ff00cc,#ffff00); color:#000; font-weight:700;">
+                Начать тест
+            </button>
+        </div>
     </div>
 
     <!-- Экран квиза -->
     <div id="quiz-screen" style="display:none;">
+        <div class="progress-container"><div id="progress-bar" class="progress-bar"></div></div>
         <div class="quiz-content">
-            <div id="section-title" class="section-title"></div>
+            <div id="section-title" class="section-title" style="color:#ffff00; font-weight:600;"></div>
             <div class="timer" id="timer">30</div>
-            <div class="timer-bar" id="timer-bar"></div>
             <div id="question-container"></div>
             <div class="answers" id="answers-container"></div>
         </div>
@@ -170,31 +198,30 @@
 
     <!-- Экран ожидания -->
     <div id="waiting-screen">
-        <h2>Ты закончил тест!</h2>
+        <h2>Ты отлично справился!</h2>
         <div class="score-big" id="personal-score"></div>
-        <p style="font-size:1.4em; margin:30px 0;">Ожидаем, пока все участники закончат...</p>
-        <p style="opacity:0.7;">Не закрывай страницу</p>
+        <p style="font-size:1.5em; margin:35px 0;">Ожидаем остальных участников...</p>
     </div>
 
     <!-- Финальный экран -->
     <div id="final-screen">
         <h2>🏆 Итоговая таблица лидеров</h2>
-        <p id="winner-announce" style="font-size:1.8em; font-weight:700; margin:25px 0;"></p>
-        <table id="leaderboard" style="width:100%; border-collapse:collapse; background:rgba(255,255,255,0.06); border-radius:16px; overflow:hidden;">
-            <thead><tr><th style="padding:15px;">Место</th><th style="padding:15px;">Имя</th><th style="padding:15px;">Очки</th></tr></thead>
+        <p id="winner-announce" style="font-size:1.85em; font-weight:700; margin:30px 0; color:#ffff00;"></p>
+        <table id="leaderboard" style="width:100%; border-collapse:collapse; background:rgba(255,255,255,0.08); border-radius:20px; overflow:hidden;">
+            <thead><tr><th style="padding:16px;">Место</th><th style="padding:16px;">Имя</th><th style="padding:16px;">Очки</th></tr></thead>
             <tbody></tbody>
         </table>
-        <button onclick="location.reload()" style="margin-top:30px; padding:16px 50px; font-size:1.15em;">Начать заново</button>
+        <button onclick="location.reload()" style="margin-top:35px; padding:17px 55px; font-size:1.2em; border-radius:18px; background:#ffff00; color:#000; font-weight:700;">
+            Начать заново
+        </button>
     </div>
 </div>
 
-<!-- Кнопка организатора -->
-<button id="organizer-btn" onclick="showFinalLeaderboard()">
-    ✅ Все закончили — Показать победителя
-</button>
+<!-- Скрытая кнопка организатора -->
+<button id="organizer-btn" onclick="showFinalLeaderboard()">✓</button>
 
 <script>
-// ==================== ПОЛНЫЙ СПИСОК ВОПРОСОВ ====================
+// ==================== ВОПРОСЫ ====================
 const questions = [
     { section: "Разогрев", q: "Какое отчество у Никиты?", a: ["Иванович", "Евгеньевич", "Андреевич", "Николаевич"], c: 1 },
     { section: "Разогрев", q: "Как зовут маму Никиты?", a: ["Елена", "Ольга", "Евгения", "Светлана"], c: 2 },
@@ -209,14 +236,14 @@ const questions = [
 
     { section: "Ты действительно знаешь Никиту?", q: "Как выглядит идеальный вечер Никиты дома?", a: ["Смотреть фильм и готовить еду", "Играть в игры и пить пиво", "Спонтанная прогулка", "Лежать и ничего не делать"], c: 1 },
     { section: "Ты действительно знаешь Никиту?", q: "Где Никита чаще всего проводит выходные летом?", a: ["Ездит на рыбалку", "В барах", "В гостях", "На прогулках"], c: 0 },
-    { section: "Ты действительно знаешь Никиту?", q: "Какой футбольный клуб (и болельщиков) Никита терпеть не может?", a: ["Тоттенхэм", "Ливерпуль", "Челси", "Все вместе взятые"], c: 3 },
-    { section: "Ты действительно знаешь Никиту?", q: "Как Никита предпочитает отдыхать после рабочей недели летом?", a: ["С женой дома", "Игры с друзьями", "Поход с палаткой и рыбалка", "Долгий сон"], c: 2 },
-    { section: "Ты действительно знаешь Никиту?", q: "Какая была первая машина Никиты?", a: ["Жигули", "Toyota", "Volkswagen", "Škoda"], c: 3 },
-    { section: "Ты действительно знаешь Никиту?", q: "Что Никита готовит лучше всего?", a: ["Пасту", "Супы", "Рыбу", "Шашлык"], c: 3 },
-    { section: "Ты действительно знаешь Никиту?", q: "Где Никита познакомился с Лизой?", a: ["В парке", "На вписке у друзей", "В баре", "На сайте знакомств"], c: 3 },
+    { section: "Ты действительно знает Никиту?", q: "Какой футбольный клуб (и болельщиков) Никита терпеть не может?", a: ["Тоттенхэм", "Ливерпуль", "Челси", "Все вместе взятые"], c: 3 },
+    { section: "Ты действительно знает Никиту?", q: "Как Никита предпочитает отдыхать после рабочей недели летом?", a: ["С женой дома", "Игры с друзьями", "Поход с палаткой и рыбалка", "Долгий сон"], c: 2 },
+    { section: "Ты действительно знает Никиту?", q: "Какая была первая машина Никиты?", a: ["Жигули", "Toyota", "Volkswagen", "Škoda"], c: 3 },
+    { section: "Ты действительно знает Никиту?", q: "Что Никита готовит лучше всего?", a: ["Пасту", "Супы", "Рыбу", "Шашлык"], c: 3 },
+    { section: "Ты действительно знает Никиту?", q: "Где Никита познакомился с Лизой?", a: ["В парке", "На вписке у друзей", "В баре", "На сайте знакомств"], c: 3 },
     { section: "Ты действительно знает Никиту?", q: "Как Никита выбирает вечерние планы?", a: ["Выйти куда-то погулять", "Остаться дома", "Позвать друзей", "Пойти на тренировку"], c: 1 },
     { section: "Ты действительно знает Никиту?", q: "Сколько полных лет Марселю (собака Никиты)?", a: ["5 лет", "10 лет", "9 лет", "7 лет"], c: 2 },
-    { section: "Ты действительно знаешь Никиту?", q: "Именинник — настоящий любитель мандаринов! Если один мандарин весит 50 г, сколько мандаринов «весит» именинник? (Подсказка: попробуйте угадать его вес и посчитать!)", a: ["1 860", "930", "1 500", "2 000"], c: 0 },
+    { section: "Ты действительно знает Никиту?", q: "Именинник — настоящий любитель мандаринов! Если один мандарин весит 50 г, сколько мандаринов «весит» именинник? (Подсказка: попробуйте угадать его вес и посчитать!)", a: ["1 860", "930", "1 500", "2 000"], c: 0 },
     { section: "Ты действительно знает Никиту?", q: "Какой фильм Никита может пересматривать бесконечно?", a: ["«Интерстеллар»", "«Матрица»", "«Бойцовский клуб»", "«Такси»"], c: 3 },
     { section: "Ты действительно знает Никиту?", q: "Какие кружки посещал в детстве?", a: ["Кройки и шитья", "Художественная школа", "Плавание", "Музыкальная школа"], c: 1 },
     { section: "Ты действительно знает Никиту?", q: "Что Никита скажет после тяжёлого дня?", a: ["«Надо проветриться»", "«Дома есть пиво?»", "«Надо сыграть пару каток»", "«Хоть бы прилечь за весь день»"], c: 3 },
@@ -237,7 +264,7 @@ let allResults = [];
 
 function startQuiz() {
     playerName = document.getElementById('playerName').value.trim();
-    if (!playerName) { alert("Пожалуйста, введи своё имя ✨"); return; }
+    if (!playerName) { alert("Введите своё имя ✨"); return; }
 
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
@@ -261,18 +288,14 @@ function showQuestion() {
         container.appendChild(btn);
     });
 
-    // Таймер
     let timeLeft = (currentQuestion === 9 || currentQuestion === 29) ? 60 : 30;
     document.getElementById('timer').textContent = timeLeft;
-    document.getElementById('timer-bar').style.width = '100%';
-    document.getElementById('timer-bar').style.background = '#22c55e';
+    document.getElementById('timer').style.color = '#ffff00';
 
     const timerInterval = setInterval(() => {
         timeLeft--;
         document.getElementById('timer').textContent = timeLeft;
-        const percent = (timeLeft / ((currentQuestion === 9 || currentQuestion === 29) ? 60 : 30)) * 100;
-        document.getElementById('timer-bar').style.width = percent + '%';
-        if (timeLeft <= 10) document.getElementById('timer-bar').style.background = '#ef4444';
+        if (timeLeft <= 10) document.getElementById('timer').style.color = '#ff3366';
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
             autoNext();
@@ -280,17 +303,22 @@ function showQuestion() {
     }, 1000);
 
     window.currentTimer = timerInterval;
+
+    // Прогресс-бар
+    const progress = ((currentQuestion) / questions.length) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+
     document.getElementById('main-btn').style.display = 'none';
 }
 
-function selectAnswer(selectedIndex, selectedBtn) {
+function selectAnswer(selectedIndex, btn) {
     if (window.currentTimer) clearInterval(window.currentTimer);
     const correctIndex = questions[currentQuestion].c;
     const allBtns = document.querySelectorAll('.answer-btn');
-    allBtns.forEach((btn, i) => {
-        btn.style.pointerEvents = 'none';
-        if (i === correctIndex) btn.classList.add('correct');
-        if (i === selectedIndex && i !== correctIndex) btn.classList.add('wrong');
+    allBtns.forEach((b, i) => {
+        b.style.pointerEvents = 'none';
+        if (i === correctIndex) b.classList.add('correct');
+        if (i === selectedIndex && i !== correctIndex) b.classList.add('wrong');
     });
     if (selectedIndex === correctIndex) score++;
     document.getElementById('main-btn').style.display = 'block';
@@ -298,7 +326,7 @@ function selectAnswer(selectedIndex, selectedBtn) {
 
 function autoNext() {
     const allBtns = document.querySelectorAll('.answer-btn');
-    allBtns.forEach(btn => btn.style.pointerEvents = 'none');
+    allBtns.forEach(b => b.style.pointerEvents = 'none');
     document.getElementById('main-btn').style.display = 'block';
 }
 
@@ -334,7 +362,7 @@ function showFinalLeaderboard() {
     allResults.forEach((p, i) => {
         const row = document.createElement('tr');
         if (p.score === maxScore) row.style.background = 'linear-gradient(90deg, #ffd93d, #ff6b6b)';
-        row.innerHTML = `<td style="padding:15px;">${i+1}</td><td style="padding:15px;">${p.name}</td><td style="padding:15px; font-weight:bold;">${p.score}</td>`;
+        row.innerHTML = `<td style="padding:16px;">${i+1}</td><td style="padding:16px;">${p.name}</td><td style="padding:16px; font-weight:bold;">${p.score}</td>`;
         tbody.appendChild(row);
     });
 
