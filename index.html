@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Квиз для Никиты</title>
 <style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f9f9f9; }
-  .container { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-  h1 { text-align: center; font-size: 1.5em; }
+  body { font-family: Arial; margin: 0; padding: 0; background: #f0f0f0; }
+  .container { max-width: 500px; margin: auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-top: 50px; }
+  h1 { text-align: center; font-size: 1.6em; }
   input, button { width: 100%; padding: 15px; font-size: 1.1em; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
   button { cursor: pointer; background: #007BFF; color: #fff; border: none; }
   button:hover { background: #0056b3; }
   .answers button { margin: 10px 0; }
-  #result { font-size: 1.3em; font-weight: bold; text-align: center; margin-top: 20px; }
+  #result { font-size: 1.4em; font-weight: bold; text-align: center; margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -28,7 +28,6 @@
   <div id="quiz-screen" style="display:none;">
     <div id="question-container"></div>
     <div class="answers" id="answers-container"></div>
-    <button id="next-btn" style="display:none;">Следующий вопрос</button>
   </div>
 
   <div id="result" style="display:none;"></div>
@@ -39,8 +38,9 @@ const questions = [
   { question: "Какое отчество у Никиты?", answers: ["Иванович","Евгеньевич","Андреевич","Николаевич"], correct: 1 },
   { question: "Как зовут маму Никиты?", answers: ["Ольга","Екатерина","Марина","Татьяна"], correct: 2 },
   { question: "Любимый цвет Никиты?", answers: ["Синий","Красный","Зелёный","Фиолетовый"], correct: 0 },
-  { question: "Где Никита родился?", answers: ["Москва","Питер","Казань","Новосибирск"], correct: 1 }
-  // Добавьте остальные вопросы
+  { question: "Где Никита родился?", answers: ["Москва","Питер","Казань","Новосибирск"], correct: 1 },
+  { question: "Любимое блюдо Никиты?", answers: ["Пицца","Суши","Борщ","Паста"], correct: 2 }
+  // Добавь остальные вопросы сюда
 ];
 
 let currentQuestion = 0;
@@ -53,7 +53,6 @@ const startScreen = document.getElementById("start-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const questionContainer = document.getElementById("question-container");
 const answersContainer = document.getElementById("answers-container");
-const nextBtn = document.getElementById("next-btn");
 const resultDiv = document.getElementById("result");
 
 // Старт квиза
@@ -69,7 +68,6 @@ function showQuestion() {
   const q = questions[currentQuestion];
   questionContainer.innerText = Вопрос ${currentQuestion+1}: ${q.question};
   answersContainer.innerHTML = "";
-  nextBtn.style.display = "none";
   q.answers.forEach((ans, index) => {
     const btn = document.createElement("button");
     btn.innerText = ans;
@@ -81,19 +79,13 @@ function showQuestion() {
 function selectAnswer(index) {
   const correctIndex = questions[currentQuestion].correct;
   if(index === correctIndex) score++;
-  nextBtn.style.display = "block";
-  // Блокируем кнопки после выбора
-  Array.from(answersContainer.children).forEach(btn => btn.disabled = true);
-}
-
-nextBtn.addEventListener("click", () => {
   currentQuestion++;
   if(currentQuestion < questions.length){
     showQuestion();
   } else {
     showResult();
   }
-});
+}
 
 function showResult() {
   quizScreen.style.display = "none";
