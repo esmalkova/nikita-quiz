@@ -3,210 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Квиз для Никиты</title>
+    <title>Квиз для Никиты 🎂 | Узнай лучшего друга!</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #6b46c1;
+            --accent: #ff6b6b;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .container {
-            max-width: 500px;
-            margin: 20px;
-            padding: 30px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-        }
-        input, button {
+            max-width: 620px;
             width: 100%;
-            padding: 15px;
-            font-size: 1.1em;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+            margin: 20px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        button {
-            cursor: pointer;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            font-weight: bold;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        .answers button {
-            margin: 8px 0;
-            background: #f8f9fa;
-            color: #333;
-        }
-        .answers button:hover {
-            background: #e9ecef;
-        }
-        .answers button.correct {
-            background: #28a745;
-            color: white;
-        }
-        .answers button.wrong {
-            background: #dc3545;
-            color: white;
-        }
-        #result {
-            font-size: 1.5em;
-            font-weight: bold;
+
+        header {
+            background: linear-gradient(90deg, var(--primary), #9f7aea);
+            padding: 25px;
             text-align: center;
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .progress-container {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.4em;
+            margin: 20px 0 10px;
+            color: #ffd93d;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .quiz-content {
+            padding: 30px;
+        }
+
+        #question-container {
+            font-size: 1.35em;
+            line-height: 1.4;
+            margin-bottom: 25px;
+            min-height: 80px;
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .answer-btn {
+            padding: 16px 20px;
+            font-size: 1.1em;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .answer-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(8px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #86efac;
+            color: white;
+            animation: pop 0.4s ease;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #f87171;
+            color: white;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        button#main-btn {
+            margin-top: 30px;
+            width: 100%;
+            padding: 16px;
+            font-size: 1.2em;
+            font-weight: 600;
+            background: var(--accent);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #result-screen, #leaderboard-screen {
+            padding: 30px;
+            text-align: center;
+            display: none;
+        }
+
+        .score-big {
+            font-size: 4.5em;
+            font-weight: 700;
+            color: #ffd93d;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255,255,255,0.1);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .winner {
+            background: linear-gradient(90deg, #ffd93d, #ff6b6b) !important;
+            color: #1a1a2e;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <h1>Квиз для Никиты 🎉</h1>
+    <header>
+        <h1>Квиз для Никиты 🎉</h1>
+        <p class="subtitle">Насколько хорошо ты его знаешь?</p>
+    </header>
 
-    <div id="start-screen">
-        <input type="text" id="playerName" placeholder="Введите ваше имя">
-        <button id="startBtn">Начать квиз</button>
+    <div class="progress-container">
+        <div id="progress-bar" class="progress-bar"></div>
+    </div>
+
+    <div id="start-screen" class="quiz-content">
+        <input type="text" id="playerName" placeholder="Твоё имя" style="width:100%; padding:16px; font-size:1.1em; border-radius:16px; border:none; margin-bottom:15px;">
+        <button onclick="startQuiz()" style="width:100%; padding:16px; font-size:1.2em;">Начать квиз!</button>
     </div>
 
     <div id="quiz-screen" style="display:none;">
-        <div id="question-container" style="font-size: 1.3em; margin-bottom: 20px; font-weight: bold;"></div>
-        <div class="answers" id="answers-container"></div>
+        <div class="quiz-content">
+            <div id="section-title" class="section-title"></div>
+            <div id="question-container"></div>
+            <div class="answers" id="answers-container"></div>
+            <button id="main-btn" onclick="nextQuestion()" style="display:none;">Далее →</button>
+        </div>
     </div>
 
-    <div id="result" style="display:none;"></div>
+    <div id="result-screen">
+        <h2>Твой результат, <span id="player-name-result"></span>!</h2>
+        <div class="score-big" id="score"></div>
+        <p id="result-message" style="font-size:1.3em;"></p>
+        <button onclick="showLeaderboard()" style="margin-top:30px; padding:14px 40px; font-size:1.1em;">Посмотреть таблицу лидеров</button>
+    </div>
+
+    <div id="leaderboard-screen">
+        <h2>🏆 Таблица лидеров</h2>
+        <table id="leaderboard-table">
+            <thead><tr><th>Место</th><th>Имя</th><th>Очки</th></tr></thead>
+            <tbody></tbody>
+        </table>
+        <button onclick="restartAll()" style="margin-top:30px; padding:14px 40px;">Начать квиз заново</button>
+    </div>
 </div>
 
 <script>
+// ==================== ВОПРОСЫ ====================
 const questions = [
-    { 
-        question: "Какое отчество у Никиты?", 
-        answers: ["Иванович", "Евгеньевич", "Андреевич", "Николаевич"], 
-        correct: 1 
-    },
-    { 
-        question: "Как зовут маму Никиты?", 
-        answers: ["Ольга", "Екатерина", "Марина", "Татьяна"], 
-        correct: 2 
-    },
-    { 
-        question: "Любимый цвет Никиты?", 
-        answers: ["Синий", "Красный", "Зелёный", "Фиолетовый"], 
-        correct: 0 
-    },
-    { 
-        question: "Где Никита родился?", 
-        answers: ["Москва", "Питер", "Казань", "Новосибирск"], 
-        correct: 1 
-    },
-    { 
-        question: "Любимое блюдо Никиты?", 
-        answers: ["Пицца", "Суши", "Борщ", "Паста"], 
-        correct: 2 
-    }
-    // Добавляй новые вопросы сюда
+    // 1-10 Разогрев
+    { section: "Разогрев", q: "Какое отчество у Никиты?", a: ["Иванович", "Евгеньевич", "Андреевич", "Николаевич"], c: 1 },
+    { section: "Разогрев", q: "Как зовут маму Никиты?", a: ["Елена", "Ольга", "Евгения", "Светлана"], c: 2 },
+    { section: "Разогрев", q: "В каком городе родился Никита?", a: ["Красноярск", "Краснодар", "Зеленоград", "Зеленогорск"], c: 2 },
+    { section: "Разогрев", q: "Какого цвета глаза у именинника?", a: ["Карие", "Зелёные", "Голубые", "Красные"], c: 1 },
+    { section: "Разогрев", q: "В каком году Никита переехал в Санкт-Петербург?", a: ["2014", "2015", "2016", "2017"], c: 2 },
+    { section: "Разогрев", q: "Какая у Никиты профессия?", a: ["Программист", "Системный администратор", "Бизнес-аналитик", "Тестировщик"], c: 0 },
+    { section: "Разогрев", q: "В какой школе учился Никита?", a: ["№ 172", "№ 175", "№ 176", "№ 174"], c: 1 },
+    { section: "Разогрев", q: "Любимый цвет Никиты?", a: ["Синий", "Зелёный", "Красный", "Чёрный"], c: 0 },
+    { section: "Разогрев", q: "Какой десерт Никита любит больше всего?", a: ["Эклер", "Медовик", "Фисташковый рулет", "Бланманже"], c: 2 },
+    { section: "Разогрев", q: "Что Никита планирует делать, если оказывается один дома?", a: ["Наводить порядок", "Оценивать траты по участку", "Зовёт друзей играть в компьютер", "Готовить что-то необычное"], c: 3 },
+
+    // 11-24 Ты действительно знаешь Никиту?
+    { section: "Ты действительно знаешь Никиту?", q: "Как выглядит идеальный вечер Никиты дома?", a: ["Смотреть фильм и готовить еду", "Играть в игры и пить пиво", "Спонтанная прогулка", "Лежать и ничего не делать"], c: 0 },
+    { section: "Ты действительно знаешь Никиту?", q: "Где Никита чаще всего проводит выходные летом?", a: ["Ездит на рыбалку", "В барах", "В гостях", "На прогулках"], c: 0 },
+    { section: "Ты действительно знаешь Никиту?", q: "Какой футбольный клуб (и болельщиков) Никита терпеть не может?", a: ["Тоттенхэм", "Ливерпуль", "Челси", "Все вместе взятые"], c: 3 },
+    { section: "Ты действительно знаешь Никиту?", q: "Как Никита предпочитает отдыхать после рабочей недели летом?", a: ["С женой дома", "Игры с друзьями", "Поход с палаткой и рыбалка", "Долгий сон"], c: 2 },
+    { section: "Ты действительно знаешь Никиту?", q: "Какая была первая машина Никиты?", a: ["Жигули", "Toyota", "Volkswagen", "Škoda"], c: 0 },
+    { section: "Ты действительно знаешь Никиту?", q: "Что Никита готовит лучше всего?", a: ["Пасту", "Супы", "Рыбу", "Шашлык"], c: 3 },
+    { section: "Ты действительно знаешь Никиту?", q: "Где Никита познакомился с Лизой?", a: ["В парке", "На вписке у друзей", "В баре", "На сайте знакомств"], c: 1 },
+    { section: "Ты действительно знаешь Никиту?", q: "Как Никита выбирает вечерние планы?", a: ["Выйти куда-то погулять", "Остаться дома", "Позвать друзей", "Пойти на тренировку"], c: 1 },
+    { section: "Ты действительно знаешь Никиту?", q: "Сколько полных лет Марселю (собака Никиты)?", a: ["5 лет", "10 лет", "9 лет", "7 лет"], c: 3 },
+    { section: "Ты действительно знаешь Никиту?", q: "Сколько мандаринов весит именинник?", a: ["715", "750", "775", "800"], c: 1 },
+    { section: "Ты действительно знаешь Никиту?", q: "Какой фильм Никита может пересматривать бесконечно?", a: ["«Интерстеллар»", "«Матрица»", "«Бойцовский клуб»", "«Такси»"], c: 0 },
+    { section: "Ты действительно знаешь Никиту?", q: "Какие кружки посещал в детстве?", a: ["Кройки и шитья", "Художественная школа", "Плавание", "Музыкальная школа"], c: 2 },
+    { section: "Ты действительно знаешь Никиту?", q: "Что Никита скажет после тяжёлого дня?", a: ["«Надо проветриться»", "«Дома есть пиво?»", "«Надо сыграть пару каток»", "«Хоть бы прилечь за весь день»"], c: 2 },
+    { section: "Ты действительно знаешь Никиту?", q: "Если Никита с женой договорился ехать в зал, но она передумала, что он сделает?", a: ["Уговорит ехать", "Поедет один", "Не поедет и останется дома", "Рассердится и уйдёт гулять"], c: 1 },
+
+    // 25-29 Финал
+    { section: "Финал. Всё или ничего", q: "Что способно вывести Никиту из себя быстрее всего?", a: ["Медленные люди", "Что-то лежит не на своём месте", "Глупые вопросы", "Арсенал проиграл"], c: 1 },
+    { section: "Финал. Всё или ничего", q: "Что Никита делает первым делом, когда выезжает на природу?", a: ["Сразу устанавливает палатку", "Находит лучшее место для рыбалки", "Разжигает костёр", "Достаёт пиво"], c: 1 },
+    { section: "Финал. Всё или ничего", q: "Если Никита выиграл пять миллионов рублей, что он сделает?", a: ["Купит жене машину", "Закроет часть ипотеки", "Поедет путешествовать", "Инвестирует"], c: 1 },
+    { section: "Финал. Всё или ничего", q: "Сколько стран посетил Никита?", a: ["7", "8", "9", "10"], c: 2 },
+    { section: "Финал. Всё или ничего", q: "Где была первая зарубежная поездка именинника?", a: ["Китай", "Германия", "Турция", "Таиланд"], c: 1 }
 ];
 
 let currentQuestion = 0;
 let score = 0;
 let playerName = '';
+let players = []; // для таблицы лидеров
 
-const startBtn = document.getElementById("startBtn");
-const nameInput = document.getElementById("playerName");
-const startScreen = document.getElementById("start-screen");
-const quizScreen = document.getElementById("quiz-screen");
-const questionContainer = document.getElementById("question-container");
-const answersContainer = document.getElementById("answers-container");
-const resultDiv = document.getElementById("result");
-
-startBtn.addEventListener("click", () => {
-    playerName = nameInput.value.trim();
+function startQuiz() {
+    playerName = document.getElementById('playerName').value.trim();
     if (!playerName) {
-        alert("Пожалуйста, введите ваше имя!");
+        alert("Пожалуйста, введи своё имя ✨");
         return;
     }
-    startScreen.style.display = "none";
-    quizScreen.style.display = "block";
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    currentQuestion = 0;
+    score = 0;
     showQuestion();
-});
+}
 
 function showQuestion() {
     const q = questions[currentQuestion];
-    
-    questionContainer.innerHTML = `Вопрос ${currentQuestion + 1} из ${questions.length}:<br>${q.question}`;
-    
-    answersContainer.innerHTML = "";
-    
-    q.answers.forEach((answer, index) => {
-        const btn = document.createElement("button");
-        btn.innerText = answer;
-        btn.addEventListener("click", () => selectAnswer(index, btn));
-        answersContainer.appendChild(btn);
+    document.getElementById('section-title').textContent = q.section;
+    document.getElementById('question-container').innerHTML = `<strong>Вопрос ${currentQuestion + 1} из ${questions.length}</strong><br>${q.q}`;
+
+    const container = document.getElementById('answers-container');
+    container.innerHTML = '';
+
+    q.a.forEach((answer, index) => {
+        const btn = document.createElement('div');
+        btn.className = 'answer-btn';
+        btn.textContent = answer;
+        btn.onclick = () => selectAnswer(index, btn);
+        container.appendChild(btn);
     });
+
+    document.getElementById('main-btn').style.display = 'none';
+    updateProgress();
 }
 
-function selectAnswer(selectedIndex, selectedButton) {
-    const correctIndex = questions[currentQuestion].correct;
-    
-    // Подсвечиваем правильный и неправильный ответ
-    const allButtons = answersContainer.querySelectorAll("button");
-    allButtons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === correctIndex) {
-            btn.classList.add("correct");
-        } else if (idx === selectedIndex) {
-            btn.classList.add("wrong");
-        }
+function selectAnswer(selectedIndex, selectedBtn) {
+    const correctIndex = questions[currentQuestion].c;
+    const allBtns = document.querySelectorAll('.answer-btn');
+
+    allBtns.forEach((btn, i) => {
+        btn.style.pointerEvents = 'none';
+        if (i === correctIndex) btn.classList.add('correct');
+        if (i === selectedIndex && i !== correctIndex) btn.classList.add('wrong');
     });
 
-    if (selectedIndex === correctIndex) {
-        score++;
-    }
+    if (selectedIndex === correctIndex) score++;
 
-    // Переходим к следующему вопросу через 1 секунду
-    setTimeout(() => {
-        currentQuestion++;
-        if (currentQuestion < questions.length) {
-            showQuestion();
-        } else {
-            showResult();
-        }
-    }, 1200);
+    document.getElementById('main-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        showResult();
+    }
+}
+
+function updateProgress() {
+    const percent = ((currentQuestion) / questions.length) * 100;
+    document.getElementById('progress-bar').style.width = percent + '%';
 }
 
 function showResult() {
-    quizScreen.style.display = "none";
-    resultDiv.style.display = "block";
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
 
-    let message = '';
+    document.getElementById('player-name-result').textContent = playerName;
+    document.getElementById('score').textContent = score + ' / ' + questions.length;
+
     const percent = Math.round((score / questions.length) * 100);
+    let msg = '';
+    if (percent === 100) msg = `🔥 Легенда! Ты знаешь Никиту лучше всех!`;
+    else if (percent >= 85) msg = `🎉 Потрясающе! Ты настоящий друг Никиты!`;
+    else if (percent >= 70) msg = `👍 Очень хорошо! Никита будет гордиться тобой!`;
+    else if (percent >= 50) msg = `🙂 Неплохо, но есть куда расти 😉`;
+    else msg = `😅 Нужно чаще общаться с Никитой!`;
 
-    if (percent === 100) {
-        message = `🎉 Отлично, ${playerName}! Ты знаешь Никиту на 100%!`;
-    } else if (percent >= 80) {
-        message = `👍 Круто, ${playerName}! Ты набрал ${score} из ${questions.length} (${percent}%)`;
-    } else if (percent >= 50) {
-        message = `🙂 Нормально, ${playerName}. Ты набрал ${score} из ${questions.length}`;
-    } else {
-        message = `😅 ${playerName}, надо лучше узнавать Никиту! Ты набрал ${score} из ${questions.length}`;
-    }
+    document.getElementById('result-message').innerHTML = msg;
 
-    resultDiv.innerHTML = message;
+    // Сохраняем результат для лидерборда
+    players.push({ name: playerName, score: score });
 }
-</script>
 
+function showLeaderboard() {
+    document.getElementById('result-screen').style.display = 'none';
+    document.getElementById('leaderboard-screen').style.display = 'block';
+
+    const tbody = document.querySelector('#leaderboard-table tbody');
+    tbody.innerHTML = '';
+
+    // Сортируем по убыванию очков
+    players.sort((a, b) => b.score - a.score);
+
+    players.forEach((p, index) => {
+        const row = document.createElement('tr');
+        if (index === 0) row.classList.add('winner');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${p.name}</td>
+            <td><strong>${p.score} / ${questions.length}</strong></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+function restartAll() {
+    location.reload();
+}
+
+// Бонус: можно добавить отдельный вопрос про страны в конце, если нужно
+</script>
 </body>
 </html>
