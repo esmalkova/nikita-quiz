@@ -2,36 +2,45 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Квиз для Никиты</title>
 <style>
-  body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
-  .answers button { display: block; margin: 5px 0; width: 100%; font-size: 1em; }
-  #result { font-size: 1.5em; font-weight: bold; margin-top: 20px; }
-  input { padding: 5px; font-size: 1em; }
-  button { padding: 10px; font-size: 1em; cursor: pointer; }
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f9f9f9; }
+  .container { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+  h1 { text-align: center; font-size: 1.5em; }
+  input, button { width: 100%; padding: 15px; font-size: 1.1em; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+  button { cursor: pointer; background: #007BFF; color: #fff; border: none; }
+  button:hover { background: #0056b3; }
+  .answers button { margin: 10px 0; }
+  #result { font-size: 1.3em; font-weight: bold; text-align: center; margin-top: 20px; }
 </style>
 </head>
 <body>
 
-<h1>Квиз для Никиты</h1>
-<div id="quiz-container">
-  <label>Ваше имя: <input type="text" id="playerName" /></label>
-  <button id="startBtn">Начать квиз</button>
-  
-  <div id="question-container" style="display:none;"></div>
-  <div class="answers" id="answers-container"></div>
-  <button id="next-btn" style="display:none;">Следующий вопрос</button>
-</div>
+<div class="container">
+  <h1>Квиз для Никиты</h1>
 
-<div id="result" style="display:none;"></div>
+  <div id="start-screen">
+    <input type="text" id="playerName" placeholder="Введите ваше имя">
+    <button id="startBtn">Начать квиз</button>
+  </div>
+
+  <div id="quiz-screen" style="display:none;">
+    <div id="question-container"></div>
+    <div class="answers" id="answers-container"></div>
+    <button id="next-btn" style="display:none;">Следующий вопрос</button>
+  </div>
+
+  <div id="result" style="display:none;"></div>
+</div>
 
 <script>
 const questions = [
   { question: "Какое отчество у Никиты?", answers: ["Иванович","Евгеньевич","Андреевич","Николаевич"], correct: 1 },
   { question: "Как зовут маму Никиты?", answers: ["Ольга","Екатерина","Марина","Татьяна"], correct: 2 },
-  { question: "Какой любимый цвет Никиты?", answers: ["Синий","Красный","Зелёный","Фиолетовый"], correct: 0 },
+  { question: "Любимый цвет Никиты?", answers: ["Синий","Красный","Зелёный","Фиолетовый"], correct: 0 },
   { question: "Где Никита родился?", answers: ["Москва","Питер","Казань","Новосибирск"], correct: 1 }
-  // Можно добавить все остальные вопросы
+  // Добавьте остальные вопросы
 ];
 
 let currentQuestion = 0;
@@ -39,51 +48,55 @@ let score = 0;
 let playerName = '';
 
 const startBtn = document.getElementById("startBtn");
+const nameInput = document.getElementById("playerName");
+const startScreen = document.getElementById("start-screen");
+const quizScreen = document.getElementById("quiz-screen");
 const questionContainer = document.getElementById("question-container");
 const answersContainer = document.getElementById("answers-container");
 const nextBtn = document.getElementById("next-btn");
 const resultDiv = document.getElementById("result");
-const nameInput = document.getElementById("playerName");
 
-startBtn.onclick = () => {
+// Старт квиза
+startBtn.addEventListener("click", () => {
   playerName = nameInput.value.trim();
-  if (!playerName) { alert("Введите имя!"); return; }
-  startBtn.style.display = "none";
-  nameInput.style.display = "none";
+  if(!playerName){ alert("Введите имя!"); return; }
+  startScreen.style.display = "none";
+  quizScreen.style.display = "block";
   showQuestion();
-}
+});
 
 function showQuestion() {
   const q = questions[currentQuestion];
-  questionContainer.style.display = "block";
   questionContainer.innerText = Вопрос ${currentQuestion+1}: ${q.question};
-  answersContainer.style.display = "block";
   answersContainer.innerHTML = "";
+  nextBtn.style.display = "none";
   q.answers.forEach((ans, index) => {
     const btn = document.createElement("button");
     btn.innerText = ans;
-    btn.onclick = () => selectAnswer(index);
+    btn.addEventListener("click", () => selectAnswer(index));
     answersContainer.appendChild(btn);
   });
-  nextBtn.style.display = "none";
 }
 
 function selectAnswer(index) {
   const correctIndex = questions[currentQuestion].correct;
-  if (index === correctIndex) score++;
-  nextBtn.style.display = "inline-block";
+  if(index === correctIndex) score++;
+  nextBtn.style.display = "block";
+  // Блокируем кнопки после выбора
+  Array.from(answersContainer.children).forEach(btn => btn.disabled = true);
 }
 
-nextBtn.onclick = () => {
+nextBtn.addEventListener("click", () => {
   currentQuestion++;
-  if (currentQuestion < questions.length) showQuestion();
-  else showResult();
-};
+  if(currentQuestion < questions.length){
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
 
 function showResult() {
-  questionContainer.style.display = "none";
-  answersContainer.style.display = "none";
-  nextBtn.style.display = "none";
+  quizScreen.style.display = "none";
   resultDiv.style.display = "block";
   resultDiv.innerText = ${playerName}, вы набрали ${score} из ${questions.length} очков!;
 }
