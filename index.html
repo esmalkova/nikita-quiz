@@ -1,46 +1,123 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Квиз для Никиты</title>
-<style>
-  body { font-family: Arial; margin: 0; padding: 0; background: #f0f0f0; }
-  .container { max-width: 500px; margin: auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-top: 50px; }
-  h1 { text-align: center; font-size: 1.6em; }
-  input, button { width: 100%; padding: 15px; font-size: 1.1em; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
-  button { cursor: pointer; background: #007BFF; color: #fff; border: none; }
-  button:hover { background: #0056b3; }
-  .answers button { margin: 10px 0; }
-  #result { font-size: 1.4em; font-weight: bold; text-align: center; margin-top: 20px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квиз для Никиты</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: 20px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        input, button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        button {
+            cursor: pointer;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .answers button {
+            margin: 8px 0;
+            background: #f8f9fa;
+            color: #333;
+        }
+        .answers button:hover {
+            background: #e9ecef;
+        }
+        .answers button.correct {
+            background: #28a745;
+            color: white;
+        }
+        .answers button.wrong {
+            background: #dc3545;
+            color: white;
+        }
+        #result {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Квиз для Никиты</h1>
+    <h1>Квиз для Никиты 🎉</h1>
 
-  <div id="start-screen">
-    <input type="text" id="playerName" placeholder="Введите ваше имя">
-    <button id="startBtn">Начать квиз</button>
-  </div>
+    <div id="start-screen">
+        <input type="text" id="playerName" placeholder="Введите ваше имя">
+        <button id="startBtn">Начать квиз</button>
+    </div>
 
-  <div id="quiz-screen" style="display:none;">
-    <div id="question-container"></div>
-    <div class="answers" id="answers-container"></div>
-  </div>
+    <div id="quiz-screen" style="display:none;">
+        <div id="question-container" style="font-size: 1.3em; margin-bottom: 20px; font-weight: bold;"></div>
+        <div class="answers" id="answers-container"></div>
+    </div>
 
-  <div id="result" style="display:none;"></div>
+    <div id="result" style="display:none;"></div>
 </div>
 
 <script>
 const questions = [
-  { question: "Какое отчество у Никиты?", answers: ["Иванович","Евгеньевич","Андреевич","Николаевич"], correct: 1 },
-  { question: "Как зовут маму Никиты?", answers: ["Ольга","Екатерина","Марина","Татьяна"], correct: 2 },
-  { question: "Любимый цвет Никиты?", answers: ["Синий","Красный","Зелёный","Фиолетовый"], correct: 0 },
-  { question: "Где Никита родился?", answers: ["Москва","Питер","Казань","Новосибирск"], correct: 1 },
-  { question: "Любимое блюдо Никиты?", answers: ["Пицца","Суши","Борщ","Паста"], correct: 2 }
-  // Добавь остальные вопросы сюда
+    { 
+        question: "Какое отчество у Никиты?", 
+        answers: ["Иванович", "Евгеньевич", "Андреевич", "Николаевич"], 
+        correct: 1 
+    },
+    { 
+        question: "Как зовут маму Никиты?", 
+        answers: ["Ольга", "Екатерина", "Марина", "Татьяна"], 
+        correct: 2 
+    },
+    { 
+        question: "Любимый цвет Никиты?", 
+        answers: ["Синий", "Красный", "Зелёный", "Фиолетовый"], 
+        correct: 0 
+    },
+    { 
+        question: "Где Никита родился?", 
+        answers: ["Москва", "Питер", "Казань", "Новосибирск"], 
+        correct: 1 
+    },
+    { 
+        question: "Любимое блюдо Никиты?", 
+        answers: ["Пицца", "Суши", "Борщ", "Паста"], 
+        correct: 2 
+    }
+    // Добавляй новые вопросы сюда
 ];
 
 let currentQuestion = 0;
@@ -55,42 +132,79 @@ const questionContainer = document.getElementById("question-container");
 const answersContainer = document.getElementById("answers-container");
 const resultDiv = document.getElementById("result");
 
-// Старт квиза
 startBtn.addEventListener("click", () => {
-  playerName = nameInput.value.trim();
-  if(!playerName){ alert("Введите имя!"); return; }
-  startScreen.style.display = "none";
-  quizScreen.style.display = "block";
-  showQuestion();
+    playerName = nameInput.value.trim();
+    if (!playerName) {
+        alert("Пожалуйста, введите ваше имя!");
+        return;
+    }
+    startScreen.style.display = "none";
+    quizScreen.style.display = "block";
+    showQuestion();
 });
 
 function showQuestion() {
-  const q = questions[currentQuestion];
-  questionContainer.innerText = Вопрос ${currentQuestion+1}: ${q.question};
-  answersContainer.innerHTML = "";
-  q.answers.forEach((ans, index) => {
-    const btn = document.createElement("button");
-    btn.innerText = ans;
-    btn.addEventListener("click", () => selectAnswer(index));
-    answersContainer.appendChild(btn);
-  });
+    const q = questions[currentQuestion];
+    
+    questionContainer.innerHTML = `Вопрос ${currentQuestion + 1} из ${questions.length}:<br>${q.question}`;
+    
+    answersContainer.innerHTML = "";
+    
+    q.answers.forEach((answer, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = answer;
+        btn.addEventListener("click", () => selectAnswer(index, btn));
+        answersContainer.appendChild(btn);
+    });
 }
 
-function selectAnswer(index) {
-  const correctIndex = questions[currentQuestion].correct;
-  if(index === correctIndex) score++;
-  currentQuestion++;
-  if(currentQuestion < questions.length){
-    showQuestion();
-  } else {
-    showResult();
-  }
+function selectAnswer(selectedIndex, selectedButton) {
+    const correctIndex = questions[currentQuestion].correct;
+    
+    // Подсвечиваем правильный и неправильный ответ
+    const allButtons = answersContainer.querySelectorAll("button");
+    allButtons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) {
+            btn.classList.add("correct");
+        } else if (idx === selectedIndex) {
+            btn.classList.add("wrong");
+        }
+    });
+
+    if (selectedIndex === correctIndex) {
+        score++;
+    }
+
+    // Переходим к следующему вопросу через 1 секунду
+    setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            showResult();
+        }
+    }, 1200);
 }
 
 function showResult() {
-  quizScreen.style.display = "none";
-  resultDiv.style.display = "block";
-  resultDiv.innerText = ${playerName}, вы набрали ${score} из ${questions.length} очков!;
+    quizScreen.style.display = "none";
+    resultDiv.style.display = "block";
+
+    let message = '';
+    const percent = Math.round((score / questions.length) * 100);
+
+    if (percent === 100) {
+        message = `🎉 Отлично, ${playerName}! Ты знаешь Никиту на 100%!`;
+    } else if (percent >= 80) {
+        message = `👍 Круто, ${playerName}! Ты набрал ${score} из ${questions.length} (${percent}%)`;
+    } else if (percent >= 50) {
+        message = `🙂 Нормально, ${playerName}. Ты набрал ${score} из ${questions.length}`;
+    } else {
+        message = `😅 ${playerName}, надо лучше узнавать Никиту! Ты набрал ${score} из ${questions.length}`;
+    }
+
+    resultDiv.innerHTML = message;
 }
 </script>
 
