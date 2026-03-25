@@ -17,52 +17,32 @@
         .container {
             max-width: 640px;
             width: 100%;
-            margin: 15px auto;
+            margin: 20px auto;
             background: rgba(255,255,255,0.07);
             backdrop-filter: blur(16px);
-            border-radius: 28px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.65);
+            border-radius: 32px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.7);
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.15);
         }
 
-        /* ==================== СТАРТОВЫЙ ЭКРАН ==================== */
-        #start-screen header {
-            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
-            padding: 40px 20px 35px;
+        /* Стартовый экран */
+        #start-screen {
             text-align: center;
+            padding: 60px 30px 90px;
         }
-        .photo-container {
-            margin: 0 auto 20px;
-            width: 230px;
-            height: 285px;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.75);
-            border: 5px solid rgba(255,255,255,0.3);
-        }
-        .photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        h1 {
-            margin: 0;
+        #start-screen h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.6em;
+            font-size: 2.8em;
             font-weight: 700;
-            text-shadow: 0 6px 25px rgba(0,0,0,0.6);
+            margin: 0 0 16px;
+            background: linear-gradient(90deg, #facc15, #fef08c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .subtitle {
-            font-size: 1.35em;
-            margin-top: 14px;
+        #start-screen .subtitle {
+            font-size: 1.38em;
+            margin-bottom: 50px;
             opacity: 0.95;
-        }
-
-        #start-screen .quiz-content {
-            padding: 40px 30px 50px;
-            text-align: center;
         }
         #playerName {
             width: 100%;
@@ -70,33 +50,30 @@
             font-size: 1.25em;
             border-radius: 20px;
             border: none;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
             box-sizing: border-box;
             background: rgba(255,255,255,0.95);
             color: #1e2937;
         }
         #start-btn {
             width: 100%;
-            padding: 20px;
-            font-size: 1.35em;
+            padding: 22px;
+            font-size: 1.4em;
             font-weight: 700;
-            border-radius: 20px;
+            border-radius: 22px;
             border: none;
             background: linear-gradient(90deg, #eab308, #facc15);
             color: #1e2937;
-            box-shadow: 0 12px 40px rgba(234, 179, 8, 0.6);
+            box-shadow: 0 15px 40px rgba(234, 179, 8, 0.6);
             cursor: pointer;
         }
         #start-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 45px rgba(234, 179, 8, 0.8);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 45px rgba(234, 179, 8, 0.8);
         }
 
-        /* ==================== ЭКРАН КВИЗА ==================== */
-        .progress-container {
-            height: 8px;
-            background: rgba(255,255,255,0.1);
-        }
+        /* Квиз */
+        .progress-container { height: 8px; background: rgba(255,255,255,0.1); }
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, #60a5fa, #93c5fd, #dbeafe);
@@ -104,21 +81,9 @@
             transition: width 0.4s ease;
         }
 
-        .quiz-content {
-            padding: 28px 30px 130px;
-            text-align: center;
-        }
-        #section-title {
-            font-size: 1.15em;
-            color: #93c5fd;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        #question-number {
-            font-size: 1.02em;
-            color: #cbd5e1;
-            margin-bottom: 12px;
-        }
+        .quiz-content { padding: 28px 30px 130px; text-align: center; }
+        #section-title { font-size: 1.15em; color: #93c5fd; margin-bottom: 8px; font-weight: 600; }
+        #question-number { font-size: 1.02em; color: #cbd5e1; margin-bottom: 12px; }
         #question-container {
             font-size: 1.43em;
             line-height: 1.48;
@@ -134,15 +99,11 @@
             font-size: 2.45em;
             font-weight: 700;
             color: #e0f2fe;
-            margin: 15px 0 30px;
+            margin: 18px 0 30px;
             text-shadow: 0 0 18px #bae6fd;
         }
 
-        .answers {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+        .answers { display: flex; flex-direction: column; gap: 16px; }
         .answer-btn {
             padding: 19px 24px;
             font-size: 1.13em;
@@ -153,10 +114,7 @@
             transition: all 0.3s;
             text-align: left;
         }
-        .answer-btn:hover {
-            background: rgba(255,255,255,0.22);
-            transform: translateX(12px);
-        }
+        .answer-btn:hover { background: rgba(255,255,255,0.22); transform: translateX(12px); }
         .answer-btn.correct { background: #4ade80; color: #0f172a; }
         .answer-btn.wrong { background: #f87171; color: white; }
 
@@ -178,7 +136,6 @@
             z-index: 90;
         }
 
-        /* Скрытая кнопка организатора */
         #organizer-btn {
             position: fixed;
             top: 18px;
@@ -193,19 +150,6 @@
             cursor: pointer;
             z-index: 200;
         }
-
-        /* Экраны ожидания и финала */
-        #waiting-screen, #final-screen {
-            padding: 70px 30px;
-            text-align: center;
-            display: none;
-        }
-        .score-big {
-            font-size: 5.4em;
-            font-weight: 700;
-            color: #bae6fd;
-            margin: 20px 0;
-        }
     </style>
 </head>
 <body>
@@ -214,15 +158,12 @@
     <!-- Стартовый экран -->
     <div id="start-screen">
         <header>
-            <div class="photo-container">
-                <img src="https://i.imgur.com/bV7un.gif" alt="Никита" class="photo">
-            </div>
             <h1>Знаешь ли ты Никиту на 100%?</h1>
             <p class="subtitle">Юбилейный тест на настоящую дружбу 🎂</p>
         </header>
         <div class="quiz-content">
             <input type="text" id="playerName" placeholder="Твоё имя" 
-                   style="width:100%; padding:20px; font-size:1.22em; border-radius:20px; border:none; margin-bottom:28px; box-sizing:border-box;">
+                   style="width:100%; padding:20px; font-size:1.25em; border-radius:20px; border:none; margin-bottom:30px; box-sizing:border-box;">
             <button onclick="startQuiz()" id="start-btn">
                 Начать квиз
             </button>
@@ -244,14 +185,14 @@
     <button id="main-btn" onclick="nextQuestion()" style="display:none;">Далее →</button>
 
     <!-- Экран после прохождения -->
-    <div id="waiting-screen" style="display:none;">
+    <div id="waiting-screen" style="display:none; padding:80px 30px; text-align:center;">
         <h2>Твой результат</h2>
         <div class="score-big" id="personal-score"></div>
         <p style="font-size:1.45em; margin:40px 0;">Ожидаем остальных участников...</p>
     </div>
 
     <!-- Финальный экран -->
-    <div id="final-screen" style="display:none;">
+    <div id="final-screen" style="display:none; padding:70px 30px; text-align:center;">
         <h2>🏆 Итоговая таблица лидеров</h2>
         <p id="winner-announce" style="font-size:1.85em; font-weight:700; margin:30px 0; color:#fcd34d;"></p>
         <table id="leaderboard" style="width:100%; border-collapse:collapse; background:rgba(255,255,255,0.08); border-radius:20px; overflow:hidden;">
@@ -264,8 +205,13 @@
     </div>
 </div>
 
-<!-- Скрытая кнопка организатора -->
 <button id="organizer-btn" onclick="showFinalLeaderboard()">✓</button>
+
+<!-- Звуки -->
+<audio id="correctSound" src="https://assets.mixkit.co/sfx/preview/296/296.wav"></audio>
+<audio id="wrongSound" src="https://assets.mixkit.co/sfx/preview/295/295.wav"></audio>
+<audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/2578/2578.wav"></audio>
+<audio id="finishSound" src="https://assets.mixkit.co/sfx/preview/2962/2962.wav"></audio>
 
 <script>
 // ==================== ВОПРОСЫ ====================
@@ -309,10 +255,17 @@ let score = 0;
 let playerName = '';
 let allResults = [];
 
+// Звуки
+const correctSound = new Audio("https://assets.mixkit.co/sfx/preview/296/296.wav");
+const wrongSound = new Audio("https://assets.mixkit.co/sfx/preview/295/295.wav");
+const clickSound = new Audio("https://assets.mixkit.co/sfx/preview/2578/2578.wav");
+const finishSound = new Audio("https://assets.mixkit.co/sfx/preview/2962/2962.wav");
+
 function startQuiz() {
     playerName = document.getElementById('playerName').value.trim();
     if (!playerName) { alert("Введите своё имя ✨"); return; }
 
+    clickSound.play();
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
     currentQuestion = 0;
@@ -336,13 +289,13 @@ function showQuestion() {
         container.appendChild(btn);
     });
 
-    let timeLeft = (currentQuestion === 19 || currentQuestion === 29) ? 60 : 30; // 20-й (мандарины) и последний — 60 сек
+    let timeLeft = (currentQuestion === 19 || currentQuestion === 29) ? 60 : 30;
     document.getElementById('timer').textContent = timeLeft;
 
     const timerInterval = setInterval(() => {
         timeLeft--;
         document.getElementById('timer').textContent = timeLeft;
-        if (timeLeft <= 10) document.getElementById('timer').style.color = '#f87171';
+        if (timeLeft <= 5) document.getElementById('timer').style.color = '#f87171';
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
             autoNext();
@@ -359,14 +312,23 @@ function showQuestion() {
 
 function selectAnswer(selectedIndex, btn) {
     if (window.currentTimer) clearInterval(window.currentTimer);
+
     const correctIndex = questions[currentQuestion].c;
     const allBtns = document.querySelectorAll('.answer-btn');
+
     allBtns.forEach((b, i) => {
         b.style.pointerEvents = 'none';
         if (i === correctIndex) b.classList.add('correct');
         if (i === selectedIndex && i !== correctIndex) b.classList.add('wrong');
     });
-    if (selectedIndex === correctIndex) score++;
+
+    if (selectedIndex === correctIndex) {
+        correctSound.play();
+        score++;
+    } else {
+        wrongSound.play();
+    }
+
     document.getElementById('main-btn').style.display = 'block';
 }
 
@@ -378,10 +340,12 @@ function autoNext() {
 
 function nextQuestion() {
     if (window.currentTimer) clearInterval(window.currentTimer);
+    clickSound.play();
     currentQuestion++;
     if (currentQuestion < questions.length) {
         showQuestion();
     } else {
+        finishSound.play();
         showResult();
     }
 }
