@@ -10,7 +10,7 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
-            background: linear-gradient(135deg, #0f0c29, #1e1b4b, #312e6b);
+            background: linear-gradient(135deg, #0c0a1f, #1a1740, #2a2659);
             color: #fff;
             min-height: 100vh;
         }
@@ -19,24 +19,27 @@
             width: 100%;
             margin: 15px auto;
             background: rgba(255,255,255,0.07);
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(16px);
             border-radius: 28px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.55);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.65);
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.15);
         }
-        header {
-            background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
-            padding: 35px 20px 25px;
+
+        /* ==================== СТАРТОВЫЙ ЭКРАН ==================== */
+        #start-screen header {
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+            padding: 40px 20px 35px;
             text-align: center;
         }
         .photo-container {
-            margin: 0 auto 18px;
-            width: 215px;
-            height: 270px;
-            border-radius: 20px;
+            margin: 0 auto 20px;
+            width: 230px;
+            height: 285px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.75);
+            border: 5px solid rgba(255,255,255,0.3);
         }
         .photo {
             width: 100%;
@@ -47,19 +50,52 @@
         h1 {
             margin: 0;
             font-family: 'Playfair Display', serif;
-            font-size: 2.45em;
+            font-size: 2.6em;
             font-weight: 700;
-            text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            text-shadow: 0 6px 25px rgba(0,0,0,0.6);
         }
         .subtitle {
-            font-size: 1.3em;
-            margin-top: 12px;
+            font-size: 1.35em;
+            margin-top: 14px;
             opacity: 0.95;
         }
 
+        #start-screen .quiz-content {
+            padding: 40px 30px 50px;
+            text-align: center;
+        }
+        #playerName {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.25em;
+            border-radius: 20px;
+            border: none;
+            margin-bottom: 28px;
+            box-sizing: border-box;
+            background: rgba(255,255,255,0.95);
+            color: #1e2937;
+        }
+        #start-btn {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.35em;
+            font-weight: 700;
+            border-radius: 20px;
+            border: none;
+            background: linear-gradient(90deg, #eab308, #facc15);
+            color: #1e2937;
+            box-shadow: 0 12px 40px rgba(234, 179, 8, 0.6);
+            cursor: pointer;
+        }
+        #start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(234, 179, 8, 0.8);
+        }
+
+        /* ==================== ЭКРАН КВИЗА ==================== */
         .progress-container {
             height: 8px;
-            background: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.1);
         }
         .progress-bar {
             height: 100%;
@@ -69,43 +105,43 @@
         }
 
         .quiz-content {
-            padding: 28px 30px 125px;
+            padding: 28px 30px 130px;
             text-align: center;
         }
         #section-title {
             font-size: 1.15em;
             color: #93c5fd;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
         #question-number {
-            font-size: 1em;
+            font-size: 1.02em;
             color: #cbd5e1;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         #question-container {
-            font-size: 1.45em;
-            line-height: 1.5;
-            margin: 0 auto 30px;
+            font-size: 1.43em;
+            line-height: 1.48;
+            margin: 0 auto 32px;
             max-width: 520px;
-            min-height: 110px;
+            min-height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
         }
         .timer {
-            font-size: 2.4em;
+            font-size: 2.45em;
             font-weight: 700;
             color: #e0f2fe;
-            margin: 15px 0 25px;
-            text-shadow: 0 0 12px #bae6fd;
+            margin: 15px 0 30px;
+            text-shadow: 0 0 18px #bae6fd;
         }
 
         .answers {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
         }
         .answer-btn {
             padding: 19px 24px;
@@ -114,11 +150,11 @@
             border: 2px solid rgba(255,255,255,0.2);
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             text-align: left;
         }
         .answer-btn:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.22);
             transform: translateX(12px);
         }
         .answer-btn.correct { background: #4ade80; color: #0f172a; }
@@ -138,17 +174,18 @@
             border: none;
             border-radius: 20px;
             color: white;
-            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5);
             z-index: 90;
         }
 
+        /* Скрытая кнопка организатора */
         #organizer-btn {
             position: fixed;
             top: 18px;
             right: 18px;
-            width: 48px;
-            height: 48px;
-            background: rgba(255,255,255,0.18);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
             border: none;
             border-radius: 50%;
             color: #bae6fd;
@@ -156,23 +193,37 @@
             cursor: pointer;
             z-index: 200;
         }
+
+        /* Экраны ожидания и финала */
+        #waiting-screen, #final-screen {
+            padding: 70px 30px;
+            text-align: center;
+            display: none;
+        }
+        .score-big {
+            font-size: 5.4em;
+            font-weight: 700;
+            color: #bae6fd;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- Главная страница -->
+
+    <!-- Стартовый экран -->
     <div id="start-screen">
         <header>
             <div class="photo-container">
-                <img src="https://i.imgur.com/bV7un.gif" alt="Никита" class="photo"> 
+                <img src="https://i.imgur.com/bV7un.gif" alt="Никита" class="photo">
             </div>
             <h1>Знаешь ли ты Никиту на 100%?</h1>
             <p class="subtitle">Юбилейный тест на настоящую дружбу 🎂</p>
         </header>
         <div class="quiz-content">
             <input type="text" id="playerName" placeholder="Твоё имя" 
-                   style="width:100%; padding:19px; font-size:1.2em; border-radius:18px; border:none; margin-bottom:25px; box-sizing:border-box;">
-            <button onclick="startQuiz()" style="width:100%; padding:19px; font-size:1.3em; border-radius:18px; background:linear-gradient(90deg,#3b82f6,#60a5fa); color:white; font-weight:700;">
+                   style="width:100%; padding:20px; font-size:1.22em; border-radius:20px; border:none; margin-bottom:28px; box-sizing:border-box;">
+            <button onclick="startQuiz()" id="start-btn">
                 Начать квиз
             </button>
         </div>
@@ -192,17 +243,17 @@
 
     <button id="main-btn" onclick="nextQuestion()" style="display:none;">Далее →</button>
 
-    <!-- Экран ожидания -->
-    <div id="waiting-screen" style="display:none; padding:80px 30px; text-align:center;">
-        <h2>Ты отлично справился!</h2>
+    <!-- Экран после прохождения -->
+    <div id="waiting-screen" style="display:none;">
+        <h2>Твой результат</h2>
         <div class="score-big" id="personal-score"></div>
         <p style="font-size:1.45em; margin:40px 0;">Ожидаем остальных участников...</p>
     </div>
 
     <!-- Финальный экран -->
-    <div id="final-screen" style="display:none; padding:70px 30px; text-align:center;">
+    <div id="final-screen" style="display:none;">
         <h2>🏆 Итоговая таблица лидеров</h2>
-        <p id="winner-announce" style="font-size:1.85em; font-weight:700; margin:30px 0; color:#bae6fd;"></p>
+        <p id="winner-announce" style="font-size:1.85em; font-weight:700; margin:30px 0; color:#fcd34d;"></p>
         <table id="leaderboard" style="width:100%; border-collapse:collapse; background:rgba(255,255,255,0.08); border-radius:20px; overflow:hidden;">
             <thead><tr><th style="padding:16px;">Место</th><th style="padding:16px;">Имя</th><th style="padding:16px;">Очки</th></tr></thead>
             <tbody></tbody>
@@ -217,7 +268,7 @@
 <button id="organizer-btn" onclick="showFinalLeaderboard()">✓</button>
 
 <script>
-// ==================== ПОЛНЫЕ ВОПРОСЫ ====================
+// ==================== ВОПРОСЫ ====================
 const questions = [
     { section: "Разогрев", q: "Какое отчество у Никиты?", a: ["Иванович", "Евгеньевич", "Андреевич", "Николаевич"], c: 1 },
     { section: "Разогрев", q: "Как зовут маму Никиты?", a: ["Елена", "Ольга", "Евгения", "Светлана"], c: 2 },
@@ -260,10 +311,8 @@ let allResults = [];
 
 function startQuiz() {
     playerName = document.getElementById('playerName').value.trim();
-    if (!playerName) {
-        alert("Пожалуйста, введи своё имя ✨");
-        return;
-    }
+    if (!playerName) { alert("Введите своё имя ✨"); return; }
+
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
     currentQuestion = 0;
@@ -287,7 +336,7 @@ function showQuestion() {
         container.appendChild(btn);
     });
 
-    let timeLeft = (currentQuestion === 9 || currentQuestion === 29) ? 60 : 30;
+    let timeLeft = (currentQuestion === 19 || currentQuestion === 29) ? 60 : 30; // 20-й (мандарины) и последний — 60 сек
     document.getElementById('timer').textContent = timeLeft;
 
     const timerInterval = setInterval(() => {
@@ -341,7 +390,7 @@ function showResult() {
     document.getElementById('quiz-screen').style.display = 'none';
     document.getElementById('main-btn').style.display = 'none';
     document.getElementById('waiting-screen').style.display = 'block';
-    document.getElementById('personal-score').textContent = `${score} / ${questions.length}`;
+    document.getElementById('personal-score').innerHTML = `Твой результат:<br><strong>${score} из 30</strong>`;
 
     allResults.push({ name: playerName, score: score });
 }
@@ -358,7 +407,7 @@ function showFinalLeaderboard() {
 
     allResults.forEach((p, i) => {
         const row = document.createElement('tr');
-        if (p.score === maxScore) row.style.background = 'linear-gradient(90deg, #60a5fa, #a5b4fc)';
+        if (p.score === maxScore) row.style.background = 'linear-gradient(90deg, #fcd34d, #facc15)';
         row.innerHTML = `<td style="padding:16px;">${i+1}</td><td style="padding:16px;">${p.name}</td><td style="padding:16px; font-weight:bold;">${p.score}</td>`;
         tbody.appendChild(row);
     });
